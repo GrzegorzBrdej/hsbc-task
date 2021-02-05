@@ -6,7 +6,10 @@ import { ITimeDisplayProps, ITimeResponse } from '../../types'
 const Time = styled.div`
 border: 1px solid black;
 width: 200px;
+min-height: 24px;
+line-height: 22px;
 margin: 20px auto;
+box-sizing: border-box;
 `
 
 function TimeDisplay ({ timezone = '' }: ITimeDisplayProps) {
@@ -24,6 +27,7 @@ function TimeDisplay ({ timezone = '' }: ITimeDisplayProps) {
 
   useEffect(() => {
     if (!timezone) {
+      setTime('')
       return
     }
 
@@ -36,7 +40,7 @@ function TimeDisplay ({ timezone = '' }: ITimeDisplayProps) {
     }
   }, [timezone])
 
-  return <Time>{time}</Time>
+  return <Time data-testid="time">{time}</Time>
 }
 
 export default TimeDisplay

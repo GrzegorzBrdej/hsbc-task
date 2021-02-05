@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { ZONES_API } from '../../consts'
 import { ITimezone, IZonesResponse, ITimezoneSelectProps } from '../../types'
+
+const Select = styled.select`
+  min-height: 24px;
+  width: 200px;
+  margin-top: 15px;
+`
 
 function TimezoneSelect ({ timezone = '', onChange }: ITimezoneSelectProps) {
   const [timezones, setTimezones] = useState<Array<ITimezone>>([])
@@ -31,14 +38,14 @@ function TimezoneSelect ({ timezone = '', onChange }: ITimezoneSelectProps) {
   }
 
   return (
-    <select value={timezone} onChange={handleChange}>
+    <Select value={timezone} onChange={handleChange} data-testid='select-zone'>
+      <option value=''>-----------</option>
       {timezones.map(tz => (
         <option value={tz.zoneName} key={tz.zoneName}>
           {tz.countryName}
-          {/* offset to +X format */}
         </option>
       ))}
-    </select>
+    </Select>
   )
 }
 
