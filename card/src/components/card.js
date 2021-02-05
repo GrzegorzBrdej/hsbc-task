@@ -1,67 +1,84 @@
-import styled from 'styled-components'
+import React from 'react'
+import {
+  Wrapper,
+  DetailsWrapper,
+  Title,
+  Subtitle,
+  Details,
+  Detail,
+  DetailHeader,
+  DetailValue,
+  PendingMark,
+  ActionsWrapper,
+  Buttons,
+  Icon,
+  Separator,
+  RejectBtn,
+  AcceptBtn,
+  LinkWrapper,
+  Link,
+} from './styled-elements'
 
-const Wrapper = styled.section`
-border: 1px solid;
-min-height: 80px;
-width: 780px;
-flex-direction: row;
-display: flex;
-`
+function Card ({
+  item,
+  handlePdf,
+  handlePrint,
+  handleReject,
+  handleAuthorise,
+  handleDetails
+}) {
+  return (
+    <Wrapper>
+      <DetailsWrapper>
+        <Title>{item.title}</Title>
+        <Subtitle>{item.subtitle}</Subtitle>
 
-const Title = styled.h1`
-font-size: 1.3em;
-font-weight: bold;
-flex: 1 1 0.625%;
-`
+        <Details>
+          <Detail>
+            <DetailHeader>Request reference</DetailHeader>
+            <DetailValue>{item.req_ref}</DetailValue>
+          </Detail>
 
-const Buttons = styled.div`
-flex: 0 0 240px;
-flex-direction: row;
-margin-top: 15px;
-`
+          <Detail>
+            <DetailHeader>Category</DetailHeader>
+            <DetailValue>{item.category}</DetailValue>
+          </Detail>
 
-const Icon = styled.i`
-font-size: 20px;
-margin: 4px;
-`
-
-const Separator = styled.span`
-border-right: 1px solid;
-margin-left: 10px;
-margin-right: 10px;
-`
-
-const Button = styled.button`
-padding: 10px 15px;
-`
-
-const RejectBtn = styled(Button)`
-background-color: white;
-margin-right: 5px;
-`
-
-const AcceptBtn = styled(Button)`
-background-color: gray;
-color: white;
-`
-
-function Card() {
-    return (
-      <Wrapper>
-        <Title>
-            Cancel / recall payment, GBP 1,000. 00
-        </Title>
+          <Detail>
+            <DetailHeader>Request status</DetailHeader>
+            <DetailValue>
+              {item.isPending && (
+                <PendingMark>
+                  <i class='fa fa-exclamation-circle' aria-hidden='true'></i>
+                </PendingMark>
+              )}
+              {item.isPending ? 'Pending authorisation' : 'Authorised'}
+            </DetailValue>
+          </Detail>
+        </Details>
+      </DetailsWrapper>
+      <ActionsWrapper>
         <Buttons>
-            <Icon><i class="fa fa-file-pdf-o" aria-hidden="true"></i></Icon>
-            <Separator></Separator>
-            <Icon><i class="fa fa-print" aria-hidden="true"></i></Icon>
+          <Icon onClick={handlePdf}>
+            <i class='fa fa-file-pdf-o' aria-hidden='true'></i>
+          </Icon>
+          <Separator></Separator>
+          <Icon onClick={handlePrint}>
+            <i class='fa fa-print' aria-hidden='true'></i>
+          </Icon>
 
-            <RejectBtn>Reject</RejectBtn>
-            <AcceptBtn>Authorise</AcceptBtn>
+          <RejectBtn onClick={handleReject}>Reject</RejectBtn>
+          <AcceptBtn onClick={handleAuthorise}>Authorise</AcceptBtn>
         </Buttons>
-      </Wrapper>
-    );
-  }
-  
-  export default Card;
-  
+
+        <LinkWrapper>
+          <Link onClick={handleDetails}>
+            Full details <i class='fa fa-caret-down' aria-hidden='true'></i>
+          </Link>
+        </LinkWrapper>
+      </ActionsWrapper>
+    </Wrapper>
+  )
+}
+
+export default Card
