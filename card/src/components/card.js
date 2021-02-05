@@ -49,7 +49,7 @@ function Card ({
             <DetailValue>
               {item.isPending && (
                 <PendingMark>
-                  <i class='fa fa-exclamation-circle' aria-hidden='true'></i>
+                  <i className='fa fa-exclamation-circle' aria-hidden='true'></i>
                 </PendingMark>
               )}
               {item.isPending ? 'Pending authorisation' : 'Authorised'}
@@ -60,11 +60,11 @@ function Card ({
       <ActionsWrapper>
         <Buttons>
           <Icon onClick={handlePdf}>
-            <i class='fa fa-file-pdf-o' aria-hidden='true'></i>
+            <i className='fa fa-file-pdf-o' aria-hidden='true'></i>
           </Icon>
           <Separator></Separator>
           <Icon onClick={handlePrint}>
-            <i class='fa fa-print' aria-hidden='true'></i>
+            <i className='fa fa-print' aria-hidden='true'></i>
           </Icon>
 
           <RejectBtn onClick={handleReject}>Reject</RejectBtn>
@@ -73,7 +73,7 @@ function Card ({
 
         <LinkWrapper>
           <Link onClick={handleDetails}>
-            Full details <i class='fa fa-caret-down' aria-hidden='true'></i>
+            Full details <i className='fa fa-caret-down' aria-hidden='true'></i>
           </Link>
         </LinkWrapper>
       </ActionsWrapper>
